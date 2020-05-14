@@ -44,7 +44,7 @@ func main() {
 				fmt.Fprintf(os.Stderr, "%s: %v\n", imgFile.Name(), err)
 				continue
 			}
-			fmt.Printf("%s: %dx%d\n", imgFile.Name(), im.Width, im.Height)
+			//fmt.Printf("%s: %dx%d\n", imgFile.Name(), im.Width, im.Height)
 
 			// Obtenir les infos fichier
 			imstat, err := reader.Stat()
@@ -71,6 +71,6 @@ func main() {
 	}
 	sort.Sort(BySize(imgArray))
 	for _, item := range imgArray {
-		fmt.Printf("%v\n", item)
+		fmt.Printf("%s:\n\tSize=%d\n\tResolution=%dx%d\n\tPath=%s\n", item.Name, item.Size, item.Dimension.Width, item.Dimension.Height, item.Path)
 	}
 }
