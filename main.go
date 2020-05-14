@@ -19,7 +19,7 @@ type Dimension struct {
 type UneImage struct {
 	Name      string
 	Dimension Dimension
-	Size      int64
+	Size      int
 	Path      string
 }
 
@@ -28,6 +28,10 @@ type BySize []UneImage
 func (a BySize) Len() int           { return len(a) }
 func (a BySize) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a BySize) Less(i, j int) bool { return a[i].Size < a[j].Size }
+
+func kbSize(kb int64) int {
+	return int(float32(kb) * 0.001)
+}
 
 func main() {
 	dir := "."
@@ -62,7 +66,7 @@ func main() {
 					Width:  im.Width,
 					Height: im.Height,
 				},
-				Size: imsize,
+				Size: kbSize(imsize),
 				Path: filepath.Join(dir, imgFile.Name()),
 			})
 		} else {
@@ -71,6 +75,6 @@ func main() {
 	}
 	sort.Sort(BySize(imgArray))
 	for _, item := range imgArray {
-		fmt.Printf("%s:\n\tSize=%d\n\tResolution=%dx%d\n\tPath=%s\n", item.Name, item.Size, item.Dimension.Width, item.Dimension.Height, item.Path)
+		fmt.Printf("%s:\n\tSize=%dkB\n\tResolution=%dx%d\n\tPath=%s\n", item.Name, item.Size, item.Dimension.Width, item.Dimension.Height, item.Path)
 	}
 }
