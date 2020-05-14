@@ -45,21 +45,17 @@ func main() {
 		if reader, err := os.Open(filepath.Join(dir, imgFile.Name())); err == nil {
 			im, _, err := image.DecodeConfig(reader)
 			if err != nil {
-				fmt.Fprintf(os.Stderr, "%s: %v\n", imgFile.Name(), err)
+				fmt.Fprintf(os.Stderr, "[!] %s -> %v\n", imgFile.Name(), err)
 				continue
 			}
-			//fmt.Printf("%s: %dx%d\n", imgFile.Name(), im.Width, im.Height)
 
-			// Obtenir les infos fichier
 			imstat, err := reader.Stat()
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "%s: %v\n", imgFile.Name(), err)
 				continue
 			}
 
-			// La taille en octets de l'image
 			imsize := imstat.Size()
-			// On l'ajoute dans notre tableau de type UneImage
 			imgArray = append(imgArray, uneImage{
 				Name: imgFile.Name(),
 				Dimension: dimensions{
