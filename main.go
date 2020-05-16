@@ -73,4 +73,6 @@ func main() {
 	for _, item := range imgArray {
 		fmt.Printf("%s:\n\tSize=%dkB\n\tResolution=%dx%d\n\tPath=%s\n", item.Name, item.Size, item.Dimension.Width, item.Dimension.Height, item.Path)
 	}
+
+	fmt.Printf("Number of images: %d\n", len(imgArray))
 }
